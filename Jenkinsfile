@@ -35,7 +35,7 @@ pipeline {
     stage('Build Docker image') {
       steps {
         echo 'Building Docker image...'
-        sh "docker build -t naridre/twitter-wall-front:${IMAGE_TAG} ."
+        sh "docker build -t naridre/twitter-wall-front:${IMAGE_TAG} -t naridre/twitter-wall-front:latest ."
       }
     }
     stage('Push Docker images') {
@@ -43,7 +43,7 @@ pipeline {
         echo 'Pushing Docker image...'
         sh '''
             docker login -u=$DOCKER_HUB_USER -p=$DOCKER_HUB_PASSWORD
-            docker push naridre/twitter-wall-front:$IMAGE_TAG
+            docker push naridre/twitter-wall-front:$IMAGE_TAG naridre/twitter-wall-front:latest
         '''
       }
     }
